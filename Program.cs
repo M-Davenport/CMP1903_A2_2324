@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CMP1903_A1_2324
+namespace CMP1903_A1_2324//defines the namespace
 {
-    internal class Program
+    internal class Program//declares the class called Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) //declares the main method
         {
-            /*
-             * Create a Game object and call its methods.
-             * Create a Testing object to verify the output and operation of the other classes.
-             */
+            Game game = new Game(); //creates a Game object
+            game.PlayGame(); //calls the PlayGame() method of the Game object
+
+            Testing testing = new Testing(); //initialises the testing object
+            testing.TestGameAndDie(game); //calls the method and passes the game object to the TestGameAndDie() method
         }
     }
 }
+
