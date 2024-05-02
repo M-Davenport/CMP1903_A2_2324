@@ -1,23 +1,39 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace CMP1903_A1_2324 //defines the namespace
+public class Testing
 {
-    internal class Testing //declares the class called Testing
-    {
-        public void TestGameAndDie(Game game) //declares the TestGameAndDie method and takes a Game object as a parameter
-        {
-            //tests the Game class            
-            int total = game.GetTotal(); //calls the gettotal method to get the total of the dice rolls
-            //asserts that the total of the three dice rolls is between 3 and 18. If not an error message is produced
-            Debug.Assert(total >= 3 && total <= 18, "Total of three dice rolls is not as between 3 and 18.");
+    private Statistics stats;
 
-            //tests the Die class
-            Die die = new Die(); //creates new instance of the die class to test if rolls are between 1 and 6
-            int rolledValue = die.Roll(); //calls the roll method and stores the value of the roll
-            //asserts that the rolled value is be between 1 and 6. if not an error message is produced
-            Debug.Assert(rolledValue >= 1 && rolledValue <= 6, "Rolled value is not between 1 and 6.");
-        }
+    public Testing(Statistics stats) //constructor that accepts a statistics instance
+    {
+        this.stats = stats;
+    }
+
+    public void TestSevensOut() //method to test sevensout game
+    {
+        SevensOut game = new SevensOut(stats);
+        game.Play();//
+        //asserts that the game stops after the dice rolls sum is 7
+        Debug.Assert(game.StoppedOnSeven, "Test failed: Sevens Out should stop at a roll totaling 7.");
+
+        Console.WriteLine("Sevens Out Test Passed: Game stops at a roll totaling 7.");
+    }
+
+    public void TestThreeOrMore() //method to test threeormore game
+    {
+        ThreeOrMore game = new ThreeOrMore(stats);
+        game.Play();
+        //asserts that the score is 20 or greater
+        Debug.Assert(game.Score >= 20, "Test failed: Three Or More should recognize when total score is at least 20.");
+
+        Console.WriteLine("Three Or More Test Passed: Total score recognized correctly at 20 or more.");
+    }
+
+    public void RunTests() //method to run the test
+    {
+        TestSevensOut(); //runs the sevensout test
+        TestThreeOrMore();//runs the threeormore test
+        Console.WriteLine("All tests completed successfully.");
     }
 }
-
