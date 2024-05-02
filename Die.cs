@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CMP1903_A1_2324 //defines the namespace
+public class Die
 {
-    internal class Die //declares the die class
+    private Random random;//encapsulation is used here to keep the dandom instance internal to the die class.
+    public int FaceValue { get; private set; }//property to get the current face value of the die
+                                              //it has a public getter and private setter
+                                              //this is encapsulation and makes sure that the facevalue can only be modified by the die class
+    public Die(Random sharedRandom)//constructor that takes a Random object as a parameter. This is dependency injection
     {
-        private static Random random = new Random(); //declares and initialises a private field for generating random numbers
-        
-        public int FaceValue { get; private set; } //declares a property to hold the current die value
+        random = sharedRandom;//assigns the passed-in Random object to the private field
+    }
 
-        public int Roll() //declares a method to roll the die
-        {
-            FaceValue = random.Next(1, 7); //generates a random number between 1 and 6 (1-7 to allow it to include up to 6) and assigns it to the FaceValue property
-            return FaceValue; //returns the rolled value
-        }
-      
-
-
+    public int Roll()//method that rolls the die and updates its face value
+    {
+        FaceValue = random.Next(1, 7);//sets the facevalue to a random number between 1 and 6
+                                      //this is an exampl of data hiding
+        return FaceValue;//returns the  facevalue.
+                         
     }
 }
-
